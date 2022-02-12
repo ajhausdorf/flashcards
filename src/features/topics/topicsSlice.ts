@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { TopicsSlice, TopicProps } from './TopicsInterface';
+import { TopicsSlice, TopicProps, SingleTopic } from './TopicsInterface';
 
 const topicsSlice = createSlice({
     name: 'topics',
@@ -8,7 +8,7 @@ const topicsSlice = createSlice({
     reducers: {
         addTopic: (state, action: PayloadAction<TopicProps>) => {
             return {
-                ...state,
+                ...state, 
                 [action.payload.id]: action.payload
             }
         },

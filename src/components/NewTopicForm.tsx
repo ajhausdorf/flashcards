@@ -10,14 +10,20 @@ export default function NewTopicForm() {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("");
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.length === 0) {
       return;
     }
-    //useAppDispatch(addTopic({name: name, icon: icon, id: 2}))
-    // dispatch your add topic action here
+    const newId = uuidv4();
+    const newTopic = {
+        id: newId,
+        name: name,
+        icon: icon
+    }
+    dispatch(addTopic(newTopic));
     history.push(ROUTES.topicsRoute());
   };
 
