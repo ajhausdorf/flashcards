@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import ROUTES from "../../app/routes";
-import { SingleQuiz, QuizzesWrapper } from "./QuizzesInterface";
+import { QuizProps, SingleQuiz } from "./QuizzesInterface";
 
 const Quizzes: React.FC = () => {
-  const quizzes: QuizzesWrapper = {}; // replace this with a call to your selector to get all the quizzes in state
+  const quizzes: SingleQuiz = {}; // replace this with a call to your selector to get all the quizzes in state
   return (
     <section className="center">
       <h1>Quizzes</h1>
       <ul className="quizzes-list">
-        {Object.values(quizzes).map((quiz: SingleQuiz) => (
+        {Object.values(quizzes).map((quiz: QuizProps) => (
           <Link key={quiz.id} to={ROUTES.quizRoute(quiz.id)}>
             <li className="quiz">{quiz.name}</li>
           </Link>

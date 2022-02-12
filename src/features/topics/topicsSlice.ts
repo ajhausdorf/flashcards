@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { TopicsSlice, SingleTopic } from './TopicsInterface';
+import { TopicsSlice, TopicProps } from './TopicsInterface';
 
 const topicsSlice = createSlice({
     name: 'topics',
     initialState: {} as TopicsSlice,
     reducers: {
-        addTopic: (state, action: PayloadAction<SingleTopic>) => {
+        addTopic: (state, action: PayloadAction<TopicProps>) => {
             return {
                 ...state,
                 [action.payload.id]: action.payload

@@ -5,10 +5,14 @@ export type QuizzesParams = {
   export interface QuizzesSlice {
     quizzes: QuizzesWrapper;
   }
+
   export interface QuizzesWrapper {
-    [key: string]: SingleQuiz;
+    quizzes: SingleQuiz;
   }
   export interface SingleQuiz {
+    [key: string]: QuizProps;
+  }
+  export interface QuizProps {
     id: string;
     topicId: string;
     name: string;

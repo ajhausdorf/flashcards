@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { CardsWrapper, SingleCard } from "./CardInterface";
+import { SingleCard, CardProps } from "./CardInterface";
 
 interface Props {
   id: string
 }
 
 const Card: React.FC<Props> = ({ id }) => {
-  const cards: CardsWrapper = {}; // replace this with a call to your selector to get all the cards in state
-  const card: SingleCard = cards[id];
+  const cards: SingleCard = {}; // replace this with a call to your selector to get all the cards in state
+  const card: CardProps = cards[id];
   const [flipped, setFlipped] = useState(false);
 
   return (

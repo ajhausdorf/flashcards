@@ -1,25 +1,25 @@
 import NewTopicForm from "../../components/NewTopicForm";
 import { Link } from "react-router-dom";
-import { TopicParams, TopicsWrapper, SingleTopic } from "./TopicsInterface";
+import { TopicParams, SingleTopic, TopicsSlice, TopicProps } from "./TopicsInterface";
 import ROUTES from "../../app/routes";
 import { useSelector } from "react-redux";
 import { selectTopics } from "./topicsSlice";
 
 const Topics: React.FC = () => {
-  const topicsObj: TopicsWrapper = useSelector(selectTopics);
+  const topicsObj: TopicsSlice = useSelector(selectTopics);
 
   return (
     <section className="center">
       <h1>Topics</h1>
       <ul className="topics-list">
-        {Object.values(topicsObj).map((topic) => (
+        {Object.values(topicsObj['topics']['topics']).map((topic) => (
           <li className="topic" key={topic.id}>
           <Link to={ROUTES.topicRoute(topic.id)} className="topic-link">
            <div className="topic-container">
              <img src={topic.icon} alt="" />
              <div className="text-content">
                <h2>{topic.name}</h2>
-               <p>{topic.quizIds.length} Quizzes</p>
+               <p>{topic.quizIds && topic.quizIds.length} Quizzes</p>
              </div>
            </div>
          </Link>

@@ -1,19 +1,19 @@
 import NewTopicForm from "../../components/NewTopicForm";
 import { Link, useParams } from "react-router-dom";
-import { SingleTopic, TopicsWrapper, TopicParams } from "./TopicsInterface";
+import { SingleTopic, TopicProps, TopicsSlice, TopicParams } from "./TopicsInterface";
 import ROUTES from "../../app/routes";
 import { useSelector } from "react-redux";
 import { selectTopics } from "./topicsSlice";
-import { QuizzesWrapper, SingleQuiz } from "../quizzes/QuizzesInterface";
+import { SingleQuiz, QuizProps } from "../quizzes/QuizzesInterface";
 
 const Topic: React.FC = () => {
-  const topicsObj: TopicsWrapper = useSelector(selectTopics);
-  const quizzes: QuizzesWrapper = {}; // replace this with a call to your selector to select all the quizzes in state
+  const topicsObj: TopicsSlice = useSelector(selectTopics);
+  const quizzes: SingleQuiz = {}; // replace this with a call to your selector to select all the quizzes in state
   let { topicId } = useParams<TopicParams>();
 
-  const topic: SingleTopic = topicsObj[topicId];
-  const quizzesForTopic: SingleQuiz[] = topic.quizIds.map((quizId) => quizzes[quizId]);
-
+  const topic: TopicProps = topicsObj['topics']['topics'][topicId];
+  const quizzesForTopic: QuizProps[] = (topic.quizIds) ? topic.quizIds.map((quizId) => quizzes[quizId]) : [];
+  
   return (
     <section>
       <img src={topic.icon} alt="" className="topic-icon" />

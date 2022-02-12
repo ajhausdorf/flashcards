@@ -7,14 +7,18 @@ export interface TopicsSlice {
 }
 
 export interface TopicsWrapper {
-    [key: string]: SingleTopic
+    topics: SingleTopic
 }
 
 export interface SingleTopic {
+    [key: string]: TopicProps
+}
+
+export interface TopicProps {
     id: string;
     name: string;
     icon: string;
-    quizIds: string[];
+    quizIds?: string[] | null;
 }
 
 // topics: {

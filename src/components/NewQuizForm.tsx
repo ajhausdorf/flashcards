@@ -2,18 +2,15 @@ import React, { SyntheticEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
-import { CardsWrapper, SingleCard } from "../features/cards/CardInterface";
-import { TopicsWrapper, SingleTopic } from "../features/topics/TopicsInterface";
-
-type InputEvent = React.ChangeEvent<HTMLInputElement>;
-type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
+import { SingleCard, CardProps } from "../features/cards/CardInterface";
+import { SingleTopic, TopicProps } from "../features/topics/TopicsInterface";
 
 const NewQuizForm: React.FC = () => {
   const [name, setName] = useState<string>("");
-  const [cards, setCards] = useState<CardsWrapper[]>([]);
+  const [cards, setCards] = useState<SingleCard[]>();
   const [topicId, setTopicId] = useState<string>("");
   const history = useHistory();
-  const topics: TopicsWrapper= {};
+  const topics: SingleTopic= {};
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +31,7 @@ const NewQuizForm: React.FC = () => {
     setCards(cards.concat({ front: "", back: "" }));
   };
 
-  const removeCard = (e: Event, index: number) => {
+  const removeCard = (e, index: number) => {
     e.preventDefault();
     setCards(cards.filter((card, i) => index !== i));
   };
@@ -61,7 +58,7 @@ const NewQuizForm: React.FC = () => {
           placeholder="Topic"
         >
           <option value="">Topic</option>
-          {Object.values(topics).map((topic: SingleTopic) => (
+          {Object.values(topics).map((topic: TopicProps) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>
