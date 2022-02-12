@@ -12,7 +12,7 @@ const Quiz: React.FC = () => {
     <section>
       <h1>{quiz.name}</h1>
       <ul className="cards-list">
-        {quiz.cardIds.map((id) => (
+        {quiz.cardIds && quiz.cardIds.map((id) => (
           <Card key={id} id={id} />
         ))}
       </ul>

@@ -13,6 +13,8 @@ import Topic from "../features/topics/Topic";
 import Quiz from "../features/quizzes/Quiz";
 import Quizzes from "../features/quizzes/Quizzes";
 import ROUTES from "./routes";
+import '../index.css';
+
 
 export default function App() {
   return (

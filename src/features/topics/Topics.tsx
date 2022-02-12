@@ -12,7 +12,7 @@ const Topics: React.FC = () => {
     <section className="center">
       <h1>Topics</h1>
       <ul className="topics-list">
-        {Object.values(topicsObj['topics']['topics']).map((topic) => (
+        {Object.values(topicsObj).map((topic) => (
           <li className="topic" key={topic.id}>
           <Link to={ROUTES.topicRoute(topic.id)} className="topic-link">
            <div className="topic-container">

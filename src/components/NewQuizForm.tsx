@@ -2,12 +2,12 @@ import React, { SyntheticEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
-import { SingleCard, CardProps } from "../features/cards/CardInterface";
+import { CardsWrapper, SingleCard, CardProps } from "../features/cards/CardInterface";
 import { SingleTopic, TopicProps } from "../features/topics/TopicsInterface";
 
 const NewQuizForm: React.FC = () => {
   const [name, setName] = useState<string>("");
-  const [cards, setCards] = useState<SingleCard[]>();
+  const [cards, setCards] = useState<CardProps[]>([]);
   const [topicId, setTopicId] = useState<string>("");
   const history = useHistory();
   const topics: SingleTopic= {};
@@ -26,20 +26,20 @@ const NewQuizForm: React.FC = () => {
     history.push(ROUTES.quizzesRoute());
   };
 
-  const addCardInputs = (e) => {
+  const addCardInputs = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setCards(cards.concat({ front: "", back: "" }));
+    //setCards(cards.concat({ front: "", back: "" }));
   };
 
-  const removeCard = (e, index: number) => {
+  const removeCard = (e: React.SyntheticEvent, index: number) => {
     e.preventDefault();
     setCards(cards.filter((card, i) => index !== i));
   };
 
   const updateCardState = (index: number, side: string, value: string) => {
     const newCards = cards.slice();
-    newCards[index][side] = value;
-    setCards(newCards);
+    // newCards[index][side] = value;
+    // setCards(newCards);
   };
 
   return (
