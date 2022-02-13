@@ -1,24 +1,38 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
-import { CardsWrapper, SingleCard, CardProps } from "../features/cards/CardInterface";
-import { SingleTopic, TopicProps } from "../features/topics/TopicsInterface";
+import { LocalCardProps } from "../features/cards/CardInterface";
+import {TopicProps, TopicsSlice } from "../features/topics/TopicsInterface";
+import { selectTopics } from "../features/topics/topicsSlice";
+
+import { createQuizAndAddIdToTopic } from "../features/quizzes/quizzesSlice";
+import { useAppDispatch } from "../app/hooks";
 
 const NewQuizForm: React.FC = () => {
   const [name, setName] = useState<string>("");
-  const [cards, setCards] = useState<CardProps[]>([]);
+  const [cards, setCards] = useState<LocalCardProps[]>([]);
   const [topicId, setTopicId] = useState<string>("");
   const history = useHistory();
-  const topics: SingleTopic= {};
-
+  const topicsObj: TopicsSlice = useSelector(selectTopics);
+  const dispatch = useAppDispatch();
+  const isValidKey = (prop: string, obj: LocalCardProps): prop is keyof (LocalCardProps) => prop in obj;
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.length === 0) {
       return;
     }
-
+    const newId = uuidv4();
     const cardIds: string[] = [];
+    dispatch(createQuizAndAddIdToTopic({
+      id: newId,
+      name: name,
+      topicId: topicId,
+      cardIds: cardIds
+    }));
+    
 
     // create the new cards here and add each card's id to cardIds
     // create the new quiz here
@@ -28,7 +42,7 @@ const NewQuizForm: React.FC = () => {
 
   const addCardInputs = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    //setCards(cards.concat({ front: "", back: "" }));
+    setCards(cards.concat({ front: "", back: "" }));    
   };
 
   const removeCard = (e: React.SyntheticEvent, index: number) => {
@@ -38,8 +52,10 @@ const NewQuizForm: React.FC = () => {
 
   const updateCardState = (index: number, side: string, value: string) => {
     const newCards = cards.slice();
-    // newCards[index][side] = value;
-    // setCards(newCards);
+    if (isValidKey(side, cards[index])) {
+      cards[index][side] = value;
+      setCards(newCards);
+    }
   };
 
   return (
@@ -58,7 +74,7 @@ const NewQuizForm: React.FC = () => {
           placeholder="Topic"
         >
           <option value="">Topic</option>
-          {Object.values(topics).map((topic: TopicProps) => (
+          {Object.values(topicsObj).map((topic: TopicProps) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>

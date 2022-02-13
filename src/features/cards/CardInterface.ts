@@ -7,8 +7,11 @@ export interface CardsSlice {
   export interface SingleCard {
     [key: string]: CardProps;
   }
-  export interface CardProps {
+  export interface CardProps extends LocalCardProps {
     id: string;
+  }
+
+  export interface LocalCardProps {
     front: string;
     back: string;
   }

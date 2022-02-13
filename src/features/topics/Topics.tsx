@@ -7,6 +7,7 @@ import { selectTopics } from "./topicsSlice";
 
 const Topics: React.FC = () => {
   const topicsObj: TopicsSlice = useSelector(selectTopics);
+  const defaultIcon = "https://static-assets.codecademy.com/skillpaths/react-redux/redux-quiz-app/balloon.svg";
 
   return (
     <section className="center">
@@ -16,7 +17,7 @@ const Topics: React.FC = () => {
           <li className="topic" key={topic.id}>
           <Link to={ROUTES.topicRoute(topic.id)} className="topic-link">
            <div className="topic-container">
-             <img src={topic.icon} alt="" />
+             <img src={topic.icon || defaultIcon} alt="" />
              <div className="text-content">
                <h2>{topic.name}</h2>
                <p>{topic.quizIds && topic.quizIds.length} Quizzes</p>
