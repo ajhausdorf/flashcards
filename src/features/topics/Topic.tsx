@@ -1,17 +1,17 @@
 import NewTopicForm from "../../components/NewTopicForm";
 import { Link, useParams } from "react-router-dom";
-import { SingleTopic, TopicProps, TopicsSlice, TopicParams } from "./TopicsInterface";
+import { TopicsWrapper, TopicParams } from "./TopicsInterface";
 import ROUTES from "../../app/routes";
 import { useSelector } from "react-redux";
 import { selectTopics } from "./topicsSlice";
 import { SingleQuiz, QuizProps } from "../quizzes/QuizzesInterface";
 
 const Topic: React.FC = () => {
-  const topicsObj: TopicsSlice = useSelector(selectTopics);
+  const topicsObj: TopicsWrapper = useSelector(selectTopics);
   const quizzes: SingleQuiz = {}; // replace this with a call to your selector to select all the quizzes in state
   let { topicId } = useParams<TopicParams>();
+  const topic = topicsObj['topics'][topicId];
 
-  const topic: TopicProps = topicsObj['topics']['topics'][topicId];
   const quizzesForTopic: QuizProps[] = (topic.quizIds) ? topic.quizIds.map((quizId) => quizzes[quizId]) : [];
   
   return (

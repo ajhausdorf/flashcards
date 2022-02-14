@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { LocalCardProps } from "../features/cards/CardInterface";
-import {TopicProps, TopicsSlice } from "../features/topics/TopicsInterface";
+import {TopicProps, TopicsWrapper } from "../features/topics/TopicsInterface";
 import { selectTopics } from "../features/topics/topicsSlice";
 
 import { createQuizAndAddIdToTopic } from "../features/quizzes/quizzesSlice";
@@ -15,7 +15,7 @@ const NewQuizForm: React.FC = () => {
   const [cards, setCards] = useState<LocalCardProps[]>([]);
   const [topicId, setTopicId] = useState<string>("");
   const history = useHistory();
-  const topicsObj: TopicsSlice = useSelector(selectTopics);
+  const topicsObj: TopicsWrapper = useSelector(selectTopics);
   const dispatch = useAppDispatch();
   const isValidKey = (prop: string, obj: LocalCardProps): prop is keyof (LocalCardProps) => prop in obj;
   
@@ -33,7 +33,6 @@ const NewQuizForm: React.FC = () => {
       cardIds: cardIds
     }));
     
-
     // create the new cards here and add each card's id to cardIds
     // create the new quiz here
 
