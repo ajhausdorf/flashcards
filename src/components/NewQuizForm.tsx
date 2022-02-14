@@ -73,7 +73,7 @@ const NewQuizForm: React.FC = () => {
           placeholder="Topic"
         >
           <option value="">Topic</option>
-          {Object.values(topicsObj).map((topic: TopicProps) => (
+          {Object.values(topicsObj['topics']).map((topic: TopicProps) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>

@@ -1,12 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import Card from "../cards/Card";
 import ROUTES from "../../app/routes";
-import { QuizzesParams, QuizProps, SingleQuiz } from './QuizzesInterface'
+import { QuizzesParams, QuizProps, QuizzesWrapper } from './QuizzesInterface'
+import { useSelector } from "react-redux";
+import { selectQuizzes } from "./quizzesSlice";
 
 const Quiz: React.FC = () => {
-  const quizzes: SingleQuiz = {}; // replace this with a call to your selector to get all the quizzes in state
+  const quizzes: QuizzesWrapper = useSelector(selectQuizzes); // replace this with a call to your selector to get all the quizzes in state
   let { quizId } = useParams<QuizzesParams>()
-  const quiz: QuizProps = quizzes[quizId];
+  const quiz: QuizProps = quizzes['quizzes'][quizId];
 
   return (
     <section>
