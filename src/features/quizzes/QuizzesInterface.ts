@@ -16,7 +16,7 @@ export type QuizzesParams = {
     id: string;
     topicId: string;
     name: string;
-    cardIds?: string[] | null;
+    cardIds?: string[];
   }
   
 

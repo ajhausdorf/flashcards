@@ -9,7 +9,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 export const createQuizAndAddIdToTopic = (payload: QuizProps): ThunkAction<void, RootState, unknown, AnyAction> => {
     return(useAppDispatch) => {
         useAppDispatch(addQuiz(payload));
-        useAppDispatch(addQuizId(payload.id));
+        useAppDispatch(addQuizId({quizId: payload.id, topicId: payload.topicId}));
     }
 }
 
