@@ -21,8 +21,7 @@ export default function NewTopicForm() {
     const newTopic = {
         id: newId,
         name: name,
-        icon: icon,
-        quizIds: []
+        icon: icon
     }
     dispatch(addTopic(newTopic));
     history.push(ROUTES.topicsRoute());

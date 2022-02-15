@@ -18,7 +18,7 @@ export interface TopicProps {
     id: string;
     name: string;
     icon: string;
-    quizIds?: string[];
+    quizIds?: string[] | null;
 }
 
 // topics: {

@@ -18,8 +18,11 @@ const topicsSlice = createSlice({
         addQuizId: (state, action) => {
             const {topicId, quizId} = action.payload;
             const quizIds = state.topics[topicId].quizIds;
-            if(quizIds || quizIds === []) {
-                quizIds.push(quizId);
+            if(quizIds === null || quizIds === undefined) {
+                state.topics[topicId].quizIds = [quizId]
+            }
+            else if(quizIds?.length > 0) {
+                state.topics[topicId].quizIds?.push(quizId)
             }
         }
     },

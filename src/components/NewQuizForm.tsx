@@ -6,9 +6,9 @@ import ROUTES from "../app/routes";
 import { LocalCardProps } from "../features/cards/CardInterface";
 import {TopicProps, TopicsWrapper } from "../features/topics/TopicsInterface";
 import { selectTopics } from "../features/topics/topicsSlice";
-
 import { createQuizAndAddIdToTopic } from "../features/quizzes/quizzesSlice";
 import { useAppDispatch } from "../app/hooks";
+import { addCard } from "../features/cards/cardsSlice";
 
 const NewQuizForm: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -24,17 +24,27 @@ const NewQuizForm: React.FC = () => {
     if (name.length === 0) {
       return;
     }
-    const newId = uuidv4();
     const cardIds: string[] = [];
+    
+    // create the new cards here and add each card's id to cardIds
+    cards.map(card => {
+      const cardId = uuidv4();
+      cardIds.push(cardId);
+      dispatch(addCard({
+        id: cardId,
+        front: card.front,
+        back: card.back
+      }))
+    })
+
+    // create the new quiz here
+    const quizId = uuidv4();
     dispatch(createQuizAndAddIdToTopic({
-      id: newId,
+      id: quizId,
       name: name,
       topicId: topicId,
       cardIds: cardIds
     }));
-    
-    // create the new cards here and add each card's id to cardIds
-    // create the new quiz here
 
     history.push(ROUTES.quizzesRoute());
   };
